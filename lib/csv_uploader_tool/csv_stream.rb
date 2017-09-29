@@ -14,6 +14,15 @@ class CsvStream
       file_stream.close
       file.path
     end
+
+    def fetch(dir)
+      all_files  = Dir[dir+'/*'].select {|x| x =~ /_.*(csv)/ }
+      actual_names = []
+      all_files.each do |path|
+        actual_names  << File.basename(path)
+      end
+      actual_names
+    end
   end
 
   def write(stream)

@@ -15,6 +15,18 @@ class CsvUploader
     def mkdir(dir)
       FileUtils.mkpath dir unless File.directory?(dir)
     end
+
+    def fetch(dir)
+      CsvStream.fetch dir
+    end
+
+    def size(dir)
+      File.absolute_path(dir).size
+    end
+
+    def remove_all_for(dir)
+      FileUtils.remove_dir dir
+    end
   end
 
   def save(stream)
@@ -33,5 +45,4 @@ class CsvUploader
   def write_stream(stream, filename)
     CsvStream.write(stream, @dir, filename)
   end
-
 end
